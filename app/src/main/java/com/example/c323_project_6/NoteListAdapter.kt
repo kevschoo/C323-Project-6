@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -62,11 +63,33 @@ class NoteListAdapter(
 
     /**
      * Sets or updates the list of notes to be displayed
-     * @param notes The new list of notes
+     * @param newNotes The new list of notes
      */
-    internal fun setNotes(notes: List<Note>)
+    internal fun setNotes(newNotes: List<Note>)
     {
-        this.notes = notes
-        notifyDataSetChanged()
+        val diffCallback = NoteDiffCallback(this.notes, newNotes)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.notes = newNotes
+        diffResult.dispatchUpdatesTo(this)
+    }
+
+    /**
+     * Internal class to handle the DiffUtil callbacks
+     */
+    private class NoteDiffCallback(
+        private val oldList: List<Note>,
+        private val newList: List<Note>
+    ) : DiffUtil.Callback()
+    {
+
+        override fun getOldListSize() = oldList.size
+
+        override fun getNewListSize() = newList.size
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition].id == newList[newItemPosition].id
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int) =
+            oldList[oldItemPosition] == newList[newItemPosition]
     }
 }

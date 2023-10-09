@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 
 /**
  * Represents the main database for the application using Room persistence library
- * It contains a table for `Note` entities
+ * It contains a table for Notes
  */
 @Database(entities = [Note::class], version = 1)
 abstract class NoteDatabase : RoomDatabase()

@@ -12,7 +12,7 @@ import com.example.c323_project_6.databinding.FragmentNoteListBinding
 import androidx.navigation.findNavController
 
 /**
- * A Fragment class representing the list of notes
+ * A Fragment class
  * Displays the list of notes using a RecyclerView and provides the ability for the user to interact with notes
  */
 class NoteListFragment : Fragment()

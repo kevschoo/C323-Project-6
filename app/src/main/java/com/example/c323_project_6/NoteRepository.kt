@@ -3,7 +3,7 @@ import androidx.lifecycle.LiveData
 
 /**
  * A repository class abstracting access to the Note data source
- * This class provides an abstraction layer between the application's ViewModel and data access operations
+ * This class is an abstraction layer between the ViewModel and data access
  */
 class NoteRepository(private val noteDao: NoteDao)
 {
